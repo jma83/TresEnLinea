@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Juego de tres en linea web! Elije jugar contra la ia u otro jugador" />
+    <meta name="keywords" content="Tres, linea, juego, practica, UPSA" />
+
+    <title>Tres en linea</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <script src="./js/bootstrap/jquery-3.5.1.slim.min.js" defer></script>
+    <script src="./js/bootstrap/popper.min.js" defer></script>
+    <script src="./js/bootstrap/bootstrap.min.js" defer></script>
+    <script src="./js/game.js" defer></script>
+</head>
+
+<body>
+    <noscript>Activa javascript en tu navegador!</noscript>
+
+    <header>
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="/img/logo.svg" width="54" height="54" class="d-inline-block align-top float-left mr-2" alt=""
+                    loading="lazy" />
+                <h1 class="float-left">Tres en linea</h1>
+            </a>
+        </nav>
+    </header>
+    <main id="main-container" class="container-sm mt-4">
+        <div id="seleccionInicial" class="card breadcrumb m-4 align-items-center">
+            <h2 class="row p-2 justify-content-md-center">Selecciona un modo de juego</h2>
+            <form id="my-form" class="ml-5">
+                <div class="row btn-group-toggle mb-3" data-toggle="buttons">
+                    <label class="btn btn-secondary active col-5 mr-2" for="option1">
+                        <input type="radio" name="options" id="option1" checked /> Jugador vs jugador
+                    </label>
+                    <label class="btn btn-secondary col-5 mr-2" for="option2">
+                        <input type="radio" name="options" id="option2" /> Jugador vs ordenador
+                    </label>
+                </div>
+                <button type="submit" class="row btn btn-info">JUGAR!</button>
+            </form>
+        </div>
+        <div class="card breadcrumb align-items-center">
+            <h2 class="row p-2 justify-content-md-center" id="guia">Turno jugador 1 (X)!</h2>
+            <table class="table table-bordered text-center table-secondary">
+                <tbody>
+                  <tr>
+                    <td ><input class="btn btn-secondary btn-lg btn-block casilla" type="button" value=""></td>
+                    <td><input class="btn btn-secondary btn-lg btn-block casilla" type="button" value=""></td>
+                    <td><input class="btn btn-secondary btn-lg btn-block casilla" type="button" value=""></td>
+                  </tr>
+                  <tr>
+                    <td><input class="btn btn-secondary btn-lg btn-block casilla" type="button" value=""></td>
+                    <td><input class="btn btn-secondary btn-lg btn-block casilla" type="button" value=""></td>
+                    <td><input class="btn btn-secondary btn-lg btn-block casilla" type="button" value=""></td>
+                  </tr>
+                  <tr>
+                    <td><input class="btn btn-secondary btn-lg btn-block casilla" type="button" value=""></td>
+                    <td><input class="btn btn-secondary btn-lg btn-block casilla" type="button" value=""></td>
+                    <td><input class="btn btn-secondary btn-lg btn-block casilla" type="button" value=""></td>
+                  </tr>
+                </tbody>
+              </table>
+              <input class="btn btn-warning float-left" type="button" onClick="window.location.reload();" value="Finalizar partida">
+            </div>
+    </main>
+</body>
+
+</html>
