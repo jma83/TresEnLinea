@@ -15,11 +15,7 @@ export default class Game {
 
         this.main.removeChild(this.initialNode);
 
-        var node = document.createElement("P");
-        var textnode = document.createTextNode("HOLI");
-        node.appendChild(textnode);
-        this.main.appendChild(node);
-        //crearCuadricula
+        this.cuadricula.crearCuadricula(this.main);
         this.guia = document.getElementById("guia");
     };
 
