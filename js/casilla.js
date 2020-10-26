@@ -5,8 +5,19 @@ export default class Casilla {
         this.btnSelectedO = "btn-danger";
     }
 
-    asociarElementoCasilla = (i) => {
-        this.casillaNode = document.getElementsByClassName("casilla")[i];
+    crearElementoCasilla = () => {
+        var input = document.createElement("INPUT");
+        var class4 = document.createAttribute("class");
+        class4.value = "btn btn-secondary btn-lg btn-block casilla";
+        input.setAttributeNode(class4);
+        var type1 = document.createAttribute("type");
+        type1.value = "button";
+        input.setAttributeNode(type1);
+        var value1 = document.createAttribute("value");
+        value1.value = "";
+        input.setAttributeNode(value1);
+        this.casillaNode = input;
+        return this.casillaNode;
     };
     marcarValor = (value) => {
         console.log(this.casillaNode);

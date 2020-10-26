@@ -3,18 +3,20 @@ import Casilla from "./casilla.js";
 
 export default class Cuadricula {
     constructor() {
-        this.casillas = null;
+        this.casillas = [];
         this.clicks = 0;
         
     }
 
     crearCuadricula = (holi) => {
+        //Crear div principal
         var div1 = document.createElement("DIV");
         var class1 = document.createAttribute("class");
         class1.value = "card breadcrumb align-items-center";
         div1.setAttributeNode(class1);
         holi.appendChild(div1);
 
+        //Crear guia informativa de turnos y fin de partida
         var h2 = document.createElement("H2");
         var textnode = document.createTextNode("Turno jugador 1 (X)!");
         var class2 = document.createAttribute("class");
@@ -26,6 +28,7 @@ export default class Cuadricula {
         h2.appendChild(textnode);
         div1.appendChild(h2);
 
+        //Crear tabla
         var table = document.createElement("TABLE");
         var class3 = document.createAttribute("class");
         class3.value = "table table-bordered text-center table-secondary";
@@ -34,28 +37,22 @@ export default class Cuadricula {
 
         var tbody = document.createElement("TBODY");
         table.appendChild(tbody);
-        for (let i = 0; i < 3; i++) {
 
+        //Creacion casillas
+        var cont = 0;
+        for (let i = 0; i < 3; i++) {
             var tr = document.createElement("TR");
             tbody.appendChild(tr);
             for (let i = 0; i < 3; i++) {
                 var td = document.createElement("TD");
                 tr.appendChild(td);
-
-                var input = document.createElement("INPUT");
-                var class4 = document.createAttribute("class");
-                class4.value = "btn btn-secondary btn-lg btn-block casilla";
-                input.setAttributeNode(class4);
-                var type1 = document.createAttribute("type");
-                type1.value = "button";
-                input.setAttributeNode(type1);
-                var value1 = document.createAttribute("value");
-                value1.value = "";
-                input.setAttributeNode(value1);
-
+                this.casillas.push(new Casilla());
+                var input = this.casillas[cont].crearElementoCasilla();
                 td.appendChild(input);
+                cont++;
             }
         }
+        //Crear boton de recargar/resetear partida
         var input2 = document.createElement("INPUT");
         var class5 = document.createAttribute("class");
         class5.value = "btn btn-warning";
@@ -71,18 +68,9 @@ export default class Cuadricula {
         input2.setAttributeNode(onClick);
         div1.appendChild(input2);
 
-        this.inicializarVariables();
-
     };
 
-    inicializarVariables =() =>{
-        this.casillas = [new Casilla(), new Casilla(), new Casilla(), new Casilla(), new Casilla(), new Casilla(), new Casilla(), new Casilla(), new Casilla()];
-        let i = 0;
-        Array.from(this.casillas).forEach((casilla) => {
-            casilla.asociarElementoCasilla(i);
-            i++;
-        });
-    };
+
 
     comprobar3Linea = () => {
         let valores = Array(9);
