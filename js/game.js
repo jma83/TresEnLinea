@@ -1,4 +1,5 @@
 import Cuadricula from "./cuadricula.js";
+import IA from "./ia.js";
 
 export default class Game {
     constructor() {
@@ -8,13 +9,16 @@ export default class Game {
         this.turnoJugador = "X";
         this.cuadricula = new Cuadricula();
         this.guia = null;
+        this.ia = null;
     }
 
     sumbitFunction = (event) => {
         event.preventDefault();
-
+        if (document.getElementById("option2").checked){
+            this.ia = new IA(this.cuadricula);            
+        }
+        
         this.main.removeChild(this.initialNode);
-
         this.cuadricula.crearCuadricula(this.main);
         this.guia = document.getElementById("guia");
     };
@@ -48,6 +52,10 @@ export default class Game {
     getCuadricula = () => {
         return this.cuadricula;
     };
+
+    getIA = () =>{
+        return this.ia;
+    }
 }
 
 

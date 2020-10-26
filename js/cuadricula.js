@@ -5,7 +5,7 @@ export default class Cuadricula {
     constructor() {
         this.casillas = [];
         this.clicks = 0;
-        
+
     }
 
     crearCuadricula = (holi) => {
@@ -76,7 +76,7 @@ export default class Cuadricula {
         let valores = Array(9);
         let i = 0;
         Array.from(this.casillas).forEach((casilla) => {
-            valores[i] = casilla.getCasillaNode().value;
+            valores[i] = casilla.value;
             i++;
         });
         if (valores[0] !== "" && valores[0] === valores[1] && valores[1] === valores[2]) {
@@ -104,7 +104,7 @@ export default class Cuadricula {
         if (this.clicks >= 9) result = true;
         console.log("comprobar tablas")
         Array.from(this.casillas).forEach((casilla) => {
-            if (casilla.getCasillaNode().value === "") {
+            if (casilla.value === "") {
                 result = false;
             }
         });
@@ -113,7 +113,8 @@ export default class Cuadricula {
     }
     marcarValorCasilla = (elementSelected, value) => {
         let i = 0;
-        let result;
+        let result=false;;
+        console.log("INTENTO MARCAR!")
         Array.from(this.casillas).forEach((casilla) => {
             if (casilla.getCasillaNode() === elementSelected) {
                 console.log("Marcamos " + i);
@@ -126,5 +127,51 @@ export default class Cuadricula {
 
         return result;
     };
+
+    marcarValorCasillaPos = (pos, value, flag = false) => {
+        let result = false;
+        if (pos >= 0 && pos <= 8) {
+            if (flag === false) {
+                result = this.casillas[pos].marcarValorVirtual(value);
+            } else {
+                result = this.casillas[pos].marcarValor(value);
+            }
+        }
+
+
+        if (flag === true && result === true) this.clicks++;
+
+        return result;
+    };
+
+    obtenerPosCasillasVacias = () => {
+        let indexCasillasVacias = [];
+        let i = 0;
+        Array.from(this.casillas).forEach((casilla) => {
+            if (casilla.value === "") {
+                indexCasillasVacias.push(i);
+            }
+            i++;
+        });
+        return indexCasillasVacias;
+    }
+
+    obtenerArrayValoresCasillas = () => {
+        let indexCasillasVacias = [];
+        Array.from(this.casillas).forEach((casilla) => {
+            indexCasillasVacias.push(casilla.value);
+        });
+        return indexCasillasVacias;
+    }
+
+    marcarCasillasCompleto = (arrayValues) => {
+        let i = 0;
+        this.casillas = [];
+        arrayValues.forEach(value => {
+            this.casillas.push(new Casilla());
+            this.casillas[i].marcarValorVirtual(value);
+            i++;
+        });
+    }
 }
 

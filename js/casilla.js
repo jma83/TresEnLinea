@@ -3,6 +3,7 @@ export default class Casilla {
         this.btnNoSelected = "btn-secondary";
         this.btnSelectedX = "btn-primary";
         this.btnSelectedO = "btn-danger";
+        this.value = "";
     }
 
     crearElementoCasilla = () => {
@@ -23,7 +24,7 @@ export default class Casilla {
         console.log(this.casillaNode);
         console.log("Valor " + value);
         if (this.casillaNode.value === "") {
-            this.casillaNode.value = value;
+            this.casillaNode.value = this.value = value;
             this.casillaNode.classList.remove(this.btnNoSelected);
             if (this.casillaNode.value == "X") {
                 this.casillaNode.classList.add(this.btnSelectedX);
@@ -35,6 +36,14 @@ export default class Casilla {
             console.log("Casilla ya marcada!");
             return false;
         }
+    };
+
+    marcarValorVirtual = (value) => {
+        console.log("Valor " + value);
+        this.value = value;
+
+        return true;
+
     };
 
     getCasillaNode = () => {
