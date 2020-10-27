@@ -21,8 +21,6 @@ export default class Casilla {
         return this.casillaNode;
     };
     marcarValor = (value) => {
-        console.log(this.casillaNode);
-        console.log("Valor " + value);
         if (this.casillaNode.value === "") {
             this.casillaNode.value = this.value = value;
             this.casillaNode.classList.remove(this.btnNoSelected);
@@ -39,7 +37,6 @@ export default class Casilla {
     };
 
     marcarValorVirtual = (value) => {
-        console.log("Valor " + value);
         this.value = value;
 
         return true;

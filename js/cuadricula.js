@@ -102,24 +102,19 @@ export default class Cuadricula {
     comprobarTablas = () => {
         let result = false;
         if (this.clicks >= 9) result = true;
-        console.log("comprobar tablas")
         Array.from(this.casillas).forEach((casilla) => {
             if (casilla.value === "") {
                 result = false;
             }
         });
-        console.log("result tablas: " + result);
         return result;
     }
     marcarValorCasilla = (elementSelected, value) => {
         let i = 0;
         let result=false;;
-        console.log("INTENTO MARCAR!")
         Array.from(this.casillas).forEach((casilla) => {
             if (casilla.getCasillaNode() === elementSelected) {
-                console.log("Marcamos " + i);
-                result = casilla.marcarValor(value);
-            }
+                result = casilla.marcarValor(value);            }
             i++;
         });
 

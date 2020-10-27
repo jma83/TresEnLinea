@@ -24,6 +24,7 @@ export default class Game {
     };
 
     comprobarFinPartida = () => {
+        console.log("ENTRO COMPROBAR FIN PARTIDA!");
         if (this.cuadricula.comprobar3Linea() === true) {
             this.guia.innerHTML = "FIN DE LA PARTIDA! GANA EL JUGADOR " + this.turnoJugador;
             console.log("Gana alguien");
