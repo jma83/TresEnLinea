@@ -5,6 +5,7 @@ export default class Cuadricula {
     constructor() {
         this.casillas = [];
         this.clicks = 0;
+        this.tamanyo = 3;
 
     }
 
@@ -40,10 +41,10 @@ export default class Cuadricula {
 
         //Creacion casillas
         var cont = 0;
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < this.tamanyo; i++) {
             var tr = document.createElement("TR");
             tbody.appendChild(tr);
-            for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < this.tamanyo; j++) {
                 var td = document.createElement("TD");
                 tr.appendChild(td);
                 this.casillas.push(new Casilla());
@@ -73,35 +74,92 @@ export default class Cuadricula {
 
 
     comprobar3Linea = () => {
-        let valores = Array(9);
+        let valores = [];
+        let check = true;
+        let j = 0;
         let i = 0;
+
+
         Array.from(this.casillas).forEach((casilla) => {
-            valores[i] = casilla.value;
-            i++;
+            valores.push(casilla.value);
         });
-        if (valores[0] !== "" && valores[0] === valores[1] && valores[1] === valores[2]) {
-            return true;
-        } else if (valores[4] !== "" && valores[3] === valores[4] && valores[4] === valores[5]) {
-            return true;
-        } else if (valores[6] !== "" && valores[6] === valores[7] && valores[7] === valores[8]) {
-            return true;
-        } else if (valores[0] !== "" && valores[0] === valores[3] && valores[3] === valores[6]) {
-            return true;
-        } else if (valores[1] !== "" && valores[1] === valores[4] && valores[4] === valores[7]) {
-            return true;
-        } else if (valores[2] !== "" && valores[2] === valores[5] && valores[5] === valores[8]) {
-            return true;
-        } else if (valores[0] !== "" && valores[0] === valores[4] && valores[4] === valores[8]) {
-            return true;
-        } else if (valores[2] !== "" && valores[2] === valores[4] && valores[4] === valores[6]) {
-            return true;
+
+        let valorAux = "";
+        //horizontales
+        for (i = 0; i < this.tamanyo * this.tamanyo; i += this.tamanyo) {
+            check = true;
+            for (j = i; j < i + this.tamanyo; j++) {
+                if (j == i) {
+                    valorAux = valores[j];
+                } else {
+                    if (valorAux === "" || valores[j] === "" || valores[j] !== valorAux) {
+                        check = false;
+                    }
+                }
+            }
+            if (check == true) return check;
         }
+
+        valorAux = "";
+        //verticales
+        for (i = 0; i < this.tamanyo; i++) {
+            check = true;
+            for (j = i; j < this.tamanyo * this.tamanyo; j += this.tamanyo) {
+                if (j == i) {
+                    valorAux = valores[j];
+                } else {
+                    if (valorAux === "" || valores[j] === "" || valores[j] !== valorAux) {
+                        check = false;
+                    }
+                }
+            }
+            if (check == true) return check;
+        }
+
+
+            valorAux = "";
+            let cont=0;
+            check = true;
+            //diagonal1
+            for (i = 0; i < this.tamanyo * this.tamanyo; i += this.tamanyo) {
+                if (i == 0) {
+                    valorAux = valores[i+cont];
+                } else {
+                    if (valorAux === "" || valores[i+cont] === "" || valores[i+cont] !== valorAux) {
+                        check = false;
+                    }else{
+                        valorAux = valores[i+cont];
+                    }
+                }
+                cont++;
+            }
+            if (check == true) return check; 
+
+            valorAux = "";
+            cont = this.tamanyo-1;
+            check = true;
+
+            //diagonal2
+            for (i = 0; i < this.tamanyo * this.tamanyo; i += this.tamanyo) {
+                if (i == 0) {
+                    valorAux = valores[i+cont];
+                } else {
+                    if (valorAux === "" || valores[i+cont] === "" || valores[i+cont] !== valorAux) {
+                        check = false;
+                    }else{
+                        valorAux = valores[i+cont];
+                    }
+                }
+                cont--;
+            }
+            if (check == true) return check;
+
         return false;
     };
 
     comprobarTablas = () => {
         let result = false;
-        if (this.clicks >= 9) result = true;
+        if (this.clicks >= this.tamanyo*this.tamanyo) result = true;
         Array.from(this.casillas).forEach((casilla) => {
             if (casilla.value === "") {
                 result = false;
@@ -111,10 +169,11 @@ export default class Cuadricula {
     }
     marcarValorCasilla = (elementSelected, value) => {
         let i = 0;
-        let result=false;;
+        let result = false;;
         Array.from(this.casillas).forEach((casilla) => {
             if (casilla.getCasillaNode() === elementSelected) {
-                result = casilla.marcarValor(value);            }
+                result = casilla.marcarValor(value);
+            }
             i++;
         });
 
@@ -125,7 +184,7 @@ export default class Cuadricula {
 
     marcarValorCasillaPos = (pos, value, flag = false) => {
         let result = false;
-        if (pos >= 0 && pos <= 8) {
+        if (pos >= 0 && pos < (this.tamanyo*this.tamanyo)) {
             if (flag === false) {
                 result = this.casillas[pos].marcarValorVirtual(value);
             } else {
