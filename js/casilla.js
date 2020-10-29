@@ -46,4 +46,8 @@ export default class Casilla {
     getCasillaNode = () => {
         return this.casillaNode;
     };
+
+    getValue = () =>{
+        return this.value;
+    }
 }

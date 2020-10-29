@@ -38,12 +38,11 @@ async function turnoJugador(event, game) {
     let flagTrigger = 0;
     if (await game.getCuadricula().marcarValorCasilla(event.target, game.getTurnoJugador()) === true) {
         flagTrigger = 1;
-        if (game.comprobarFinPartida()) flagTrigger = 2;
-        if (flagTrigger == 1) {
+        if (game.comprobarFinPartida()) 
+            flagTrigger = 2;
+        if (flagTrigger == 1) 
             game.cambiaTurnoJugador();
-            if (game.getIA() != null && game.getTurnoJugador() === game.getIA().getTurnoIA())
-                flagTrigger = 1;
-        }
+        
     } else {
         console.log("No se cambia de turno ni se marca casilla");
         flagTrigger = 0;
@@ -54,7 +53,7 @@ async function turnoJugador(event, game) {
 
 async function turnoIA(game){
     let resultclick = 0;
-    if (game.getIA() != null) {
+    if (game.getIA() != null && game.getTurnoJugador() === game.getIA().getTurnoIA()) {
         resultclick = await game.getIA().marcarIA();
         if (game.comprobarFinPartida()) resultclick = 2;
         if (resultclick !== 2)
