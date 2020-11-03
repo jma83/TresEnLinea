@@ -5,15 +5,17 @@ export default class Game {
     constructor() {
         this.initialNode = document.getElementById("seleccionInicial");
         this.main = document.getElementById("main-container");
-
         this.turnoJugador = "X";
-        this.cuadricula = new Cuadricula();
         this.guia = null;
         this.ia = null;
     }
 
     sumbitFunction = (event) => {
         event.preventDefault();
+        let lineas = document.getElementById("lineasCuadricula").value;
+        console.log(lineas);
+        this.cuadricula = new Cuadricula(lineas);
+
         if (document.getElementById("option2").checked){
             this.ia = new IA(this.cuadricula);            
         }

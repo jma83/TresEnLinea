@@ -4,7 +4,7 @@ import Cuadricula from "./cuadricula.js";
 export default class IA {
     constructor(c) {
         this.cuadricula = c;
-        this.cuadriculaVirtual = new Cuadricula();
+        this.cuadriculaVirtual = new Cuadricula(this.cuadricula.getTamanyo());
         this.valueIA = "O";
         this.valueJugador = "X";
         this.flag = false;
@@ -35,7 +35,7 @@ export default class IA {
         this.cuadriculaVirtual.marcarCasillasCompleto(cuadricula.obtenerArrayValoresCasillas());
         posicionesVacias.forEach(pos => {
             this.cuadriculaVirtual.marcarValorCasillaPos(pos, valor);
-            if (this.cuadriculaVirtual.comprobar3Linea() && this.flag === false) {
+            if (this.cuadriculaVirtual.comprobar3Linea()===true && this.flag === false) {
                 this.cuadricula.marcarValorCasillaPos(pos, this.valueIA, true);
                 this.flag = true;
                 return this.flag;

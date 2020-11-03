@@ -2,10 +2,11 @@ import Casilla from "./casilla.js";
 
 
 export default class Cuadricula {
-    constructor() {
+    constructor(tam) {
         this.casillas = [];
         this.clicks = 0;
-        this.tamanyo = 3;
+        this.tamanyo = Math.floor(tam);
+        this.tamanyoCuadrado = this.tamanyo * this.tamanyo;
 
     }
 
@@ -86,7 +87,7 @@ export default class Cuadricula {
 
         let valorAux = "";
         //horizontales
-        for (i = 0; i < this.tamanyo * this.tamanyo; i += this.tamanyo) {
+        for (i = 0; i < this.tamanyoCuadrado; i += this.tamanyo) {
             check = true;
             for (j = i; j < i + this.tamanyo; j++) {
                 if (j == i) {
@@ -104,7 +105,7 @@ export default class Cuadricula {
         //verticales
         for (i = 0; i < this.tamanyo; i++) {
             check = true;
-            for (j = i; j < this.tamanyo * this.tamanyo; j += this.tamanyo) {
+            for (j = i; j < this.tamanyoCuadrado; j += this.tamanyo) {
                 if (j == i) {
                     valorAux = valores[j];
                 } else {
@@ -121,7 +122,7 @@ export default class Cuadricula {
             let cont=0;
             check = true;
             //diagonal1
-            for (i = 0; i < this.tamanyo * this.tamanyo; i += this.tamanyo) {
+            for (i = 0; i < this.tamanyoCuadrado; i += this.tamanyo) {
                 if (i == 0) {
                     valorAux = valores[i+cont];
                 } else {
@@ -140,7 +141,7 @@ export default class Cuadricula {
             check = true;
 
             //diagonal2
-            for (i = 0; i < this.tamanyo * this.tamanyo; i += this.tamanyo) {
+            for (i = 0; i < this.tamanyoCuadrado; i += this.tamanyo) {
                 if (i == 0) {
                     valorAux = valores[i+cont];
                 } else {
@@ -159,7 +160,7 @@ export default class Cuadricula {
 
     comprobarTablas = () => {
         let result = false;
-        if (this.clicks >= this.tamanyo*this.tamanyo) result = true;
+        if (this.clicks >= this.tamanyoCuadrado) result = true;
         Array.from(this.casillas).forEach((casilla) => {
             if (casilla.value === "") {
                 result = false;
@@ -184,7 +185,7 @@ export default class Cuadricula {
 
     marcarValorCasillaPos = (pos, value, flag = false) => {
         let result = false;
-        if (pos >= 0 && pos < (this.tamanyo*this.tamanyo)) {
+        if (pos >= 0 && pos < (this.tamanyoCuadrado)) {
             if (flag === false) {
                 result = this.casillas[pos].marcarValorVirtual(value);
             } else {
@@ -226,6 +227,10 @@ export default class Cuadricula {
             this.casillas[i].marcarValorVirtual(value);
             i++;
         });
+    }
+
+    getTamanyo(){
+        return this.tamanyo;
     }
 }
 
